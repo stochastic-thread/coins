@@ -16,8 +16,13 @@
 
         <p class="lead">The most difficult part of using Bitcoin is not knowing that your coins are truly secure.
 
-        It is so easy to lose access to our own machines and we all know how inconvenient it is to be in that position. In fact, it is exactly those times that we most need access to our funds, so the Coins team built this app to help you store your coins safely. Far away, locked in a secure remote location is a physical copy of your private keys that not even we have access to. Just a simple sign in and address generating mechanism that makes it easy to spend and receive the currency of the Internet.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        It is so easy to lose access to our own machines and we all know how inconvenient it is to be in that position. In fact, it is exactly those times that we most need access to our funds, so the Coins team built this app to help you store your coins safely. Far away, locked in a secure remote location is a physical copy of your private keys that not even we have access to.</p>
+        <% if current_user.nil? %>
+        <%= link_to("Sign up", new_user_registration_path, class: "btn btn-lg btn-primary") %>
+        <%= link_to("Log in", new_user_session_path, class: "btn btn-lg btn-success") %>
+        <% else %>
+        <%= link_to("Log out", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger") %>
+        <% end %>
       </div>
 
       <div class="row marketing" >
