@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @transfer.quantity %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @transfer.sender_id %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @transfer.receiver_id %>
+</p>
+
+<%= link_to 'Edit', edit_transfer_path(@transfer) %> |
+<%= link_to 'Back', transfers_path %>
