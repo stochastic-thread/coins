@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :transfers
-
   devise_for :users
+  resources :transfers
   root 'pages#home'
 
   get 'pages/about'

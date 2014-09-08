@@ -18,7 +18,7 @@ class TransfersControllerTest < ActionController::TestCase
 
   test "should create transfer" do
     assert_difference('Transfer.count') do
-      post :create, transfer: { quantity: @transfer.quantity, receiver_id: @transfer.receiver_id, sender_id: @transfer.sender_id }
+      post :create, transfer: { quantity: @transfer.quantity, recipient_id: @transfer.recipient_id, sender_id: @transfer.sender_id }
     end
 
     assert_redirected_to transfer_path(assigns(:transfer))
@@ -35,7 +35,7 @@ class TransfersControllerTest < ActionController::TestCase
   end
 
   test "should update transfer" do
-    patch :update, id: @transfer, transfer: { quantity: @transfer.quantity, receiver_id: @transfer.receiver_id, sender_id: @transfer.sender_id }
+    patch :update, id: @transfer, transfer: { quantity: @transfer.quantity, recipient_id: @transfer.recipient_id, sender_id: @transfer.sender_id }
     assert_redirected_to transfer_path(assigns(:transfer))
   end
 
