@@ -1,2 +1,17 @@
+$navbar-default-bg: #3498db;
+$navbar-default-link-color: #ffffff;
+$navbar-default-link-active-color: #ecf0f1;
+$font-family: Helvetica;
+$jumbotron-padding: 15px;
+$navbar-default-link-hover-color: #ddd;
+
+$navbar-default-toggle-hover-bg:           #bbb;
+$navbar-default-toggle-icon-bar-bg:        #fff;
+$navbar-default-toggle-border-color:       #ddd;
+
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+
+.navbar-btn {
+	margin-right: 10px;
+}

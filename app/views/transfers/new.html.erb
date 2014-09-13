@@ -1,9 +1,13 @@
 <div class="container">
 	<div class="panel panel-default">
-		<div class="panel-header">
-			<h1>New transfer by <%= current_user.name %></h1>
+		<div class="panel-header container">
+			<% if current_user %>
+				<h1>New transfer by <%= current_user.name %></h1>
+			<% else %>
+				<h1> New transfer </h1>
+			<% end %>
 		</div>
-	
+
 		<div class="panel-body">
 			<%= render 'form' %>
 		</div>

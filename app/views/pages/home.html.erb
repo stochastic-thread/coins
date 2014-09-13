@@ -1,44 +1,46 @@
-    <div class="container">
-      <div class="header">
+
+
+    
+<!--       <div class="header">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
-        <h3 class="text-muted">Simple Bitcoin wallet</h3>
-      </div>
+        <h3 class="text-muted">Coins</h3>
+      </div> -->
 
-      <div class="jumbotron" style="margin-bottom: 0px">
-        <h1>Coins</h1>
-        <h2>Welcome aboard. </h2>
-
-        <h2>This is Coins, a super simple Bitcoin wallet web app.</h2>
+      <div class="jumbotron">
+        <div class="container">
+        <% if current_user %>
+          <h1>Welcome back, <%= current_user.name.split(" ")[0].titleize %></h1>
+        <% else %>
+          <h1>Coins</h1>
+        <% end %>
 
         <p class="lead">The most difficult part of using Bitcoin is not knowing that your coins are truly secure.
 
         It is so easy to lose access to our own machines and we all know how inconvenient it is to be in that position. In fact, it is exactly those times that we most need access to our funds, so the Coins team built this app to help you store your coins safely. Far away, locked in a secure remote location is a physical copy of your private keys that not even we have access to.</p>
-        <% if current_user.nil? %>
-        <%= link_to("Sign up", new_user_registration_path, class: "btn btn-lg btn-primary") %>
-        <%= link_to("Log in", new_user_session_path, class: "btn btn-lg btn-success") %>
-        <% else %>
-        <%= link_to("Log out", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-danger") %>
-        <% end %>
+        </div>
       </div>
 
-      <div class="row marketing" >
-        <div class="col-lg-6">
-          <!-- 
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p> -->
+      <div class="container">
+        <div class="col-lg-4">
+          <h2>Simple</h2>
+          <p>Simplicity is the state or quality of being simple. It usually relates to the burden which a thing puts on someone trying to explain or understand it. Something which is easy to understand or explain is simple, in contrast to something complicated.</p>
+          <p>"Simplicity boils down to two steps: Identify the essential. Eliminate the rest." – Leo Babauta</p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
         </div>
-
-
+        <div class="col-lg-4">
+          <h2>Secure</h2>
+          <p>Data security means protecting data, such as a database, from destructive forces and the unwanted actions of unauthorized users. In cryptography, encryption is the process of encoding messages or information in such a way that only authorized parties can read it. Encryption does not of itself prevent interception, but denies the message content to the interceptor. </p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-lg-4">
+          <h2>Social</h2>
+          <p>The term social refers to a characteristic of living organisms as applied to populations of humans and other animals. It always refers to the interaction of organisms with other organisms and to their collective co-existence, irrespective of whether they are aware of it or not, and irrespective of whether the interaction is voluntary or involuntary.</p>
+          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        </div>
       </div>
 
       <div class="footer">
