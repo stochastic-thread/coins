@@ -21,9 +21,12 @@
 
     <div class="form-group">
       <%= f.label :recipient_id %><br> 
-      <!-- <%= f.collection_select(:recipient_id, User.where.not(id: current_user.id), :id, :name ) %> -->
-      <!-- <%= f.number_field :recipient_id, class: "form-control" %> -->
-      <%= f.autocomplete_field :recipient_id, autocomplete_user_name_suggestions_path, :id_element => '#transfer_recipient_id', class: "form-control" %>
+      <!-- <%= f.autocomplete_field :recipient_id, autocomplete_user_name_suggestions_path, :id_element => '#transfer_recipient_id', class: "form-control" %> -->
+      <%= f.hidden_field :recipient_id, :id_element => 'transfer_recipient_id' %>
+      <%= autocomplete_field_tag 'recipient', '',
+          autocomplete_user_name_suggestions_path,
+          :size => 75, :id_element => '#transfer_recipient_id', class: "form-control"  %>
+
     </div>
     <div class="actions">
       <%= f.submit :class => "btn btn-success" %>
