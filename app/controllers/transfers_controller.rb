@@ -24,15 +24,12 @@ class TransfersController < ApplicationController
   # POST /transfers
   # POST /transfers.json
   def create
-    @transfer = Transfer.new(transfer_params)
-
-    respond_to do |format|
+    if current_user
+      @transfer = current_user.sent_transfers.create(transfer_params)
       if @transfer.save
-        format.html { redirect_to @transfer, notice: 'Transfer was successfully created.' }
-        format.json { render :show, status: :created, location: @transfer }
+        redirect_to @transfer, notice: 'Transfer was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @transfer.errors, status: :unprocessable_entity }
+        render :new
       end
     end
   end
@@ -40,14 +37,10 @@ class TransfersController < ApplicationController
   # PATCH/PUT /transfers/1
   # PATCH/PUT /transfers/1.json
   def update
-    respond_to do |format|
-      if @transfer.update(transfer_params)
-        format.html { redirect_to @transfer, notice: 'Transfer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transfer }
-      else
-        format.html { render :edit }
-        format.json { render json: @transfer.errors, status: :unprocessable_entity }
-      end
+    if @transfer.update(transfer_params)
+      redirect_to @transfer, notice: 'Transfer was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -55,10 +48,7 @@ class TransfersController < ApplicationController
   # DELETE /transfers/1.json
   def destroy
     @transfer.destroy
-    respond_to do |format|
-      format.html { redirect_to transfers_url, notice: 'Transfer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to transfers_url, notice: 'Transfer was successfully destroyed.'
   end
 
   private
@@ -69,6 +59,6 @@ class TransfersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transfer_params
-      params.require(:transfer).permit(:quantity, :sender_id, :recipient_id)
+      params.require(:transfer).permit(:quantity, :recipient_id)
     end
 end

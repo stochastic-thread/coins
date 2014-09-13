@@ -1,29 +1,33 @@
-<%= form_for(@transfer) do |f| %>
-  <% if @transfer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@transfer.errors.count, "error") %> prohibited this transfer from being saved:</h2>
 
-      <ul>
-      <% @transfer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="panel panel-default">
+  <%= form_for(@transfer) do |f| %>
+    <% if @transfer.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@transfer.errors.count, "error") %> prohibited this transfer from being saved:</h2>
+
+        <ul>
+        <% @transfer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="panel-body">
+    <div class="form-group">
+      <%= f.label :quantity %><br>
+      <%= f.number_field :quantity, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :recipient_id %><br> 
+      <!-- <%= f.collection_select(:recipient_id, User.where.not(id: current_user.id), :id, :name ) %> -->
+      <!-- <%= f.number_field :recipient_id, class: "form-control" %> -->
+      <%= f.autocomplete_field :recipient_id, autocomplete_user_name_suggestions_path, :id_element => '#transfer_recipient_id', class: "form-control" %>
+    </div>
+    <div class="actions">
+      <%= f.submit :class => "btn btn-success" %>
+    </div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.number_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :sender_id %><br>
-    <%= f.number_field :sender_id %>
-  </div>
-  <div class="field">
-    <%= f.label :recipient_id %><br>
-    <%= f.number_field :recipient_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

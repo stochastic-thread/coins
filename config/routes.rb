@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :transfers
+
+  resources :suggestions do
+    get :autocomplete_user_name, :on => :collection
+  end
+
   root 'pages#home'
 
   get 'pages/about'

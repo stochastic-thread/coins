@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"></p>
 
 <p>
   <strong>Quantity:</strong>
@@ -7,12 +7,12 @@
 
 <p>
   <strong>Sender:</strong>
-  <%= @transfer.sender_id %>
+  <%= User.find(@transfer.sender_id).name.titleize %>
 </p>
 
 <p>
   <strong>Recipient:</strong>
-  <%= @transfer.recipient_id %>
+  <%= User.find(@transfer.recipient_id).name.titleize %>
 </p>
 
 <%= link_to 'Edit', edit_transfer_path(@transfer) %> |
