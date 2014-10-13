@@ -2,7 +2,7 @@
 	<div class="panel panel-default">
 		<div class="panel-header container">
 			<% if current_user %>
-				<h1>New transfer by <%= current_user.name %></h1>
+				<h1>New transfer by <%= current_user.name.titleize %></h1>
 			<% else %>
 				<h1> New transfer </h1>
 			<% end %>

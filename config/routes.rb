@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :wallets
+
   devise_for :users
   resources :transfers
 
