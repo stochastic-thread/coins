@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_create :basic_wallet
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,5 +20,9 @@ class User < ActiveRecord::Base
 
   def show_name
   	self.name.titleize
+  end
+
+  def basic_wallet
+    self.wallet = Wallet.create(:owner_id => self.id)
   end
 end

@@ -13,7 +13,7 @@
   <tbody>
     <% @wallets.each do |wallet| %>
       <tr>
-        <td><%= wallet.owner_id %></td>
+        <td><%= User.find(wallet.owner_id).name %></td>
         <td><%= wallet.receiving_address %></td>
         <td><%= wallet.balance %></td>
         <td><%= link_to 'Show', wallet %></td>

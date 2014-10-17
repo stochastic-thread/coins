@@ -9,12 +9,15 @@
 <body>
 
 	
-	<%= render('layouts/header') %>
+		<%= render('layouts/header') %>
+
 	<div class="container">
-		<p class="notice"><%= notice %></p>
-		<p class="alert"><%= alert %></p>
+
+		<% flash.each { |name, msg| %>
+			<%= content_tag(:div, msg, class: "alert alert-info") %>
+		<% } %> 
+		<%= yield %>
 	</div>
-	<%= yield %>
 
 </body>
 </html>
