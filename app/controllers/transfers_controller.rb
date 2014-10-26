@@ -25,13 +25,18 @@ class TransfersController < ApplicationController
   # POST /transfers.json
   def create
     if current_user
-      @transfer = current_user.sent_transfers.create(transfer_params)
-      if @transfer.save
-        redirect_to @transfer, notice: 'Transfer was successfully created.'
+      transaction_quantity = transfer_params[:quantity]
+      user_balance = current_user.balance - transaction_quantity
+      if (user_balance > 0) 
+        @transfer = current_user.sent_transfers.create(transfer_params)
+        if @transfer.save
+          redirect_to @transfer, notice: 'Transfer was successfully created.'
+        else
+          render :new
+        end
       else
-        render :new
+        redirect_to @transfer, notice: 'Transfer unsuccessful. Insufficient funds.'
       end
-    end
   end
 
   # PATCH/PUT /transfers/1

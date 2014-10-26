@@ -28,7 +28,8 @@ class WalletsController < ApplicationController
 
     respond_to do |format|
       if @wallet.save
-        format.html { redirect_to @wallet, notice: 'Your receiving address is #{wallet.receiving_address}.' }
+        debug @wallet.receiving_address
+        format.html { redirect_to @wallet, notice: 'Your receiving address is' }
         format.json { render :show, status: :created, location: @wallet }
       else
         format.html { render :new }
