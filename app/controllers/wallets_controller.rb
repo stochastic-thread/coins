@@ -28,7 +28,8 @@ class WalletsController < ApplicationController
 
     respond_to do |format|
       if @wallet.save
-        format.html { redirect_to @wallet, notice: 'Wallet was successfully created.' }
+        debug @wallet.receiving_address
+        format.html { redirect_to @wallet, notice: 'Your receiving address is' }
         format.json { render :show, status: :created, location: @wallet }
       else
         format.html { render :new }
@@ -37,8 +38,6 @@ class WalletsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /wallets/1
-  # PATCH/PUT /wallets/1.json
   def update
     respond_to do |format|
       if @wallet.update(wallet_params)
@@ -69,6 +68,6 @@ class WalletsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wallet_params
-      params.require(:wallet).permit(:owner_id, :receiving_address, :balance)
+      params.require(:wallet).permit(:owner_id, :receiving_address, :balance, :owner_name)
     end
 end
