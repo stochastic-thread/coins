@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="251a4037-dff8-44ea-92d9-ffcd3838623f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/db/migrate/20140908090932_devise_create_users" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/pages/home.html.erb" afterPath="$PROJECT_DIR$/app/views/pages/home.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/transfers_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/transfers_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="coins.iws" />
@@ -36,8 +32,8 @@
       <file leaf-file-name="home.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/pages/home.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26717559" vertical-offset="0" max-vertical-offset="945">
-              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.610687" vertical-offset="0" max-vertical-offset="945">
+              <caret line="16" column="114" selection-start-line="16" selection-start-column="114" selection-end-line="16" selection-end-column="114" />
               <folding>
                 <marker date="1414414501000" expanded="true" signature="1395:1935" placeholder="..." />
               </folding>
@@ -930,8 +926,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/pages/home.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26717559" vertical-offset="0" max-vertical-offset="945">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.610687" vertical-offset="0" max-vertical-offset="945">
+          <caret line="16" column="114" selection-start-line="16" selection-start-column="114" selection-end-line="16" selection-end-column="114" />
           <folding>
             <marker date="1414414501000" expanded="true" signature="1395:1935" placeholder="..." />
           </folding>
