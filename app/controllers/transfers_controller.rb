@@ -66,4 +66,5 @@ class TransfersController < ApplicationController
     def transfer_params
       params.require(:transfer).permit(:quantity, :recipient_id)
     end
+  end
 end

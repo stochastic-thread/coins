@@ -1,30 +1,33 @@
+<div class="container">
+  <div class="jumbotron center">
+    <% if current_user %>
+        <h1>Hello, <%= current_user.name.split(" ")[0].titleize %></h1>
+        <% require 'open-uri' %>
+        <% require 'json' %>
+        <% url = "https://blockchain.info/address/#{ current_user.wallet.receiving_address }?format=json" %>
+        <% @data = URI.parse(url).read %>
+        <% hash_data = JSON.parse(@data) %>
+        <% balance = BigDecimal.new(hash_data['final_balance'].to_s) %>
+        <% balance = balance.fdiv(BigDecimal.new("100000000")) %>
+        <% current_user.balance = balance %>
+        <% puts "Balance: #{balance.to_f} BTC" %>
+        <% if balance == 0 %>
+            <p>Begin by sending some BTC to your receiving address, displayed below.</p>
+        <% elsif balance < 1.0 %>
+            <h2><button type="button" class="btn btn-primary btn-lg">Balance</button> <%= balance.to_f %> bitcoin</h2>
+        <% else %>
+            <h2><button type="button" class="btn btn-primary btn-lg">Balance</button> <%= balance.to_f %> bitcoins</h2>
+        <% end %>
+        <h2><button type="button" class="btn btn-primary btn-lg">Address</button> <%= current_user.wallet.receiving_address %> </h2>
 
+    <% else %>
+        <h1>Coins</h1>
+    <% end %>
+    <p> Top up your account, get your friends online, and send them coins. </p>
+    <p> For free. Forever. </p>
+  </div>
+</div>
 
-    
-<!--       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">Coins</h3>
-      </div> -->
-
-        <div class="container">
-
-
-        </div>
-
-                  <div class="jumbotron center">
-          <% if current_user %>
-            <h1>Hello, <%= current_user.name.split(" ")[0].titleize %></h1>
-            <h2><%= current_user.wallet.receiving_address %> </h2>
-          <% else %>
-            <h1>Coins</h1>
-          <% end %>
-                  <p> Top up your account, get your friends online, and send them coins. </p> 
-                  <p> For free. Forever. </p>
-          </div>
 
 
 <!--
@@ -51,4 +54,4 @@
         <p>&copy; Colle Industries 2014</p>
       </div>
 -->
-    </div> <!-- /container -->
+<!--    </div>  /container -->
