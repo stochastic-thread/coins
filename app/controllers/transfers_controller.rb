@@ -25,7 +25,7 @@ class TransfersController < ApplicationController
   # POST /transfers.json
   def create
     if current_user
-      transaction_quantity = transfer_params[:quantity]
+      transaction_quantity = transfer_params([:quantity])
       user_balance = current_user.balance - transaction_quantity
       if (user_balance > 0) 
         @transfer = current_user.sent_transfers.create(transfer_params)

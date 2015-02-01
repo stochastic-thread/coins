@@ -11,14 +11,32 @@
         <% balance = balance.fdiv(BigDecimal.new("100000000")) %>
         <% current_user.balance = balance %>
         <% puts "Balance: #{balance.to_f} BTC" %>
-        <% if balance == 0 %>
-            <p>Begin by sending some BTC to your receiving address, displayed below.</p>
-        <% elsif balance < 1.0 %>
-            <h2><button type="button" class="btn btn-primary btn-lg">Balance</button> <%= balance.to_f %> bitcoin</h2>
-        <% else %>
-            <h2><button type="button" class="btn btn-primary btn-lg">Balance</button> <%= balance.to_f %> bitcoins</h2>
-        <% end %>
-        <h2><button type="button" class="btn btn-primary btn-lg">Address</button> <%= current_user.wallet.receiving_address %> </h2>
+     
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Your wallet</h3>
+          </div>
+          
+          <div class="panel-body">
+            <table class="table">
+            <thead>
+              <th>Address</th>
+              <th>Balance</th>
+            </thead>
+            <tr>
+              <td> <%= current_user.wallet.receiving_address %> </td>
+              <td> <% if balance == 0 %>
+                <p> Begin by sending some BTC to your receiving address, displayed below.</p>
+                <% elsif balance < 1.0 %>
+                    <%= balance.to_f %> bitcoin
+                <% else %>
+                    <%= balance.to_f %> bitcoins
+                <% end %> </td>
+            </tr>
+            </table>
+          </div>
+        </div>
 
     <% else %>
         <h1>Coins</h1>

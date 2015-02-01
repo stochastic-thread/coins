@@ -6,9 +6,10 @@ class Wallet < ActiveRecord::Base
 						 :primary_key => "owner_id"
 
   def keypair
-    key = Bitcoin::generate_key
-    privkey = key[0]
-    pubkey = key[1]
+    key = Bitcoin::Key.generate
+    privkey = key.priv()
+    pubkey = key.pub()
+    self.wif = key.to_base58
     self.private_key = privkey
     self.public_key = pubkey
     addr = Bitcoin::pubkey_to_address(pubkey)
