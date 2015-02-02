@@ -1,6 +1,6 @@
 <h1>Listing transfers</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Quantity</th>
@@ -14,8 +14,8 @@
     <% @transfers.each do |transfer| %>
       <tr>
         <td><%= transfer.quantity %></td>
-        <td><%= transfer.sender_id %></td>
-        <td><%= transfer.recipient_id %></td>
+        <td><%= User.find(transfer.sender_id).name %></td>
+        <td><%= User.find(transfer.recipient_id).name %></td>
         <td><%= link_to 'Show', transfer %></td>
         <td><%= link_to 'Edit', edit_transfer_path(transfer) %></td>
         <td><%= link_to 'Destroy', transfer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

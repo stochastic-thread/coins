@@ -62,6 +62,8 @@
 
               <td>           
                 <%= dollar_balance %>  
+                <% current_user.wallet.dollar_balance = dollar_balance %>
+                <% current_user.wallet.save() %>
               </td> 
               
             </tr>

@@ -22,4 +22,6 @@ gem 'bitcoin'
 gem 'rails4-autocomplete'
 gem 'jquery-ui-rails'
 gem 'curb'
-gem 'chain'
+gem 'ffi'
+
+gem 'chain-ruby'
