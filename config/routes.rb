@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :wallets
 
-  devise_for :users
+  devise_for :users, :controllers => { :sessions => "custom_sessions" }
+
   resources :transfers
 
   resources :suggestions do

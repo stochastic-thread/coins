@@ -2,9 +2,14 @@
 
 en:
   devise:
+    custom_sessions:
+      user:
+        signed_in: "Signed in successfully."
+        signed_out: "Signed out successfully."
+        
     confirmations:
       confirmed: "Your account was successfully confirmed."
-      confirmed_and_signed_in: "Your account was successfully confirmed. You are now signed in."
+      confirmed_and_signed_in: "Your account was successfully confirmed. You are now signed_up in."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
     failure:

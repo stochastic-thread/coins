@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201020125) do
+ActiveRecord::Schema.define(version: 20150201213407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20150201020125) do
     t.string   "private_key"
     t.string   "public_key"
     t.string   "wif"
+    t.integer  "dollar_balance"
+    t.string   "prevtx"
   end
 
 end

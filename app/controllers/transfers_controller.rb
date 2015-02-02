@@ -1,3 +1,5 @@
+require 'chain'
+
 class TransfersController < ApplicationController
   before_action :set_transfer, only: [:show, :edit, :update, :destroy]
 
@@ -25,8 +27,8 @@ class TransfersController < ApplicationController
   # POST /transfers.json
   def create
     if current_user
-      transaction_quantity = transfer_params([:quantity])
-      user_balance = current_user.balance - transaction_quantity
+      transaction_quantity = params[:transfer][:quantity]
+      user_balance = current_user.wallet.balance - transaction_quantity.to_i
       if (user_balance > 0) 
         @transfer = current_user.sent_transfers.create(transfer_params)
         if @transfer.save
@@ -34,8 +36,12 @@ class TransfersController < ApplicationController
         else
           render :new
         end
-      else
+      elsif user_balance < transaction_quantity
         redirect_to @transfer, notice: 'Transfer unsuccessful. Insufficient funds.'
+      end
+
+      if (user_balance == 0) 
+        redirect_to @transfer, notice: 'Transfer unsuccessful. You have no money.'
       end
   end
 
@@ -65,6 +71,24 @@ class TransfersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transfer_params
       params.require(:transfer).permit(:quantity, :recipient_id)
+    end
+
+    def build_tx
+      chain_client.transact(  
+        inputs: [
+          {
+            address: current_user.wallet.receiving_address,
+            private_key: current_user.wallet.wif
+          }
+        ],
+        outputs: [
+          {
+            address: User.find(params[:transfer][:id]),
+            amount: params[:transfer][:quantity]
+          }
+        ]
+      )
+      current_user.wallet.balance = 
     end
   end
 end
