@@ -1,32 +1,38 @@
 <div class="container">
   <div class="jumbotron center">
     <% if current_user %>
-        <h1><%= current_user.name.titleize %></h1>
-
-     
+        <h1>
+          <%= current_user.name.titleize %>
+        </h1>
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Your wallet</h3>
+            <h3 class="panel-title">
+              Your wallet
+            </h3>
           </div>
           
           <div class="panel-body">
             <table class="table">
-            <thead>
-              <th>Address</th>
-              <th>Balance (Ƀ)</th>
-              <th>Balance ($)</th>
-            </thead>
+              <thead>
+                <th>Address</th>
+                <th>Balance (Ƀ)</th>
+                <th>Balance ($)</th>
+              </thead>
+            
             <tr>
-              <td> <%= current_user.wallet.receiving_address %> </td>
+              <td> 
+                <%= current_user.wallet.receiving_address %> 
+              </td>
+              
               <% if current_user.wallet.balance == nil %>
                   <%  current_user.wallet.balance = 0 %>
                   <%  current_user.wallet.save() %>
                   <%  current_user.save() %>
-              <% end %>                  
+              <% end %>
 
               <% if current_user.wallet.balance == 0 %>
-                <p> Begin by sending some BTC to your receiving address, displayed below.</p>
+                <p> Begin by sending some BTC to your receiving address, displayed below. </p>
               <% else %>    
               <% require 'curb' %>
               <% url = "https://bitcoin.toshi.io/api/v0/addresses/" %>
@@ -48,6 +54,7 @@
                     <%= current_user.wallet.balance.to_f.fdiv(100000000) %> bitcoins
                 <% end %> 
               </td>
+
               <% url = "https://api.coindesk.com/v1/bpi/currentprice.json" %>
               <% balance = current_user.wallet.balance %>
 
@@ -105,4 +112,4 @@
         <p>&copy; Colle Industries 2014</p>
       </div>
 -->
-<!--    </div>  /container -->
+</div>
