@@ -27,18 +27,18 @@ class TransfersController < ApplicationController
   # POST /transfers
   # POST /transfers.json
   def create
+    @transfer = current_user.sent_transfers.create(transfer_params)
     if current_user
       transaction_quantity = params[:transfer][:quantity]
-      user_balance = current_user.wallet.balance - transaction_quantity.to_i
-      if (user_balance > transaction_quantity.to_i) 
+      user_balance = current_user.wallet.balance
+      if (user_balance > transaction_quantity.to_i + 10000) 
         build_tx()
-        @transfer = current_user.sent_transfers.create(transfer_params)
         if @transfer.save
           redirect_to @transfer, notice: 'Transfer was successfully created.'
         else
           render :new
         end
-      elsif user_balance < transaction_quantity
+      elsif (user_balance < transaction_quantity.to_i + 10000)
         redirect_to @transfer, notice: 'Transfer unsuccessful. Insufficient funds.'
       elsif (user_balance == 0) 
         redirect_to @transfer, notice: 'Transfer unsuccessful. You have no money.'
@@ -89,11 +89,11 @@ class TransfersController < ApplicationController
         }
       ]
     )
-    update_balance
+    update_balance(params[:transfer][:quantity] - 10000)
     puts str
   end
 
-  def update_balance
+  def update_balance(quantity)
     url = "https://bitcoin.toshi.io/api/v0/addresses/"
     url += current_user.wallet.receiving_address
     @data = Curl.get(url).body_str
