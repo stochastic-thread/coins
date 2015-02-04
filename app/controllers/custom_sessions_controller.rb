@@ -21,12 +21,12 @@ class CustomSessionsController < Devise::SessionsController
   	else
       current_user.wallet.balance = 0
     end
-    
+
 		current_user.wallet.save()
 		current_user.save()
   	
   	urlX = "https://api.coindesk.com/v1/bpi/currentprice.json"
-    @data = URI.parse(urlX).read
+    @data = Curl.get(urlX).body_str
   	dollar = JSON.parse(@data)["bpi"]["USD"]["rate"].to_f
   	balance = current_user.wallet.balance
   	dollar_balance = ((balance * dollar)).fdiv(100000000)
