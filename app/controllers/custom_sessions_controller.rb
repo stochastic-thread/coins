@@ -1,5 +1,5 @@
 require 'json'
-require 'open-uri'
+require 'curb'
 
 class CustomSessionsController < Devise::SessionsController
   #before_filter :before_login, :only => :create
@@ -11,12 +11,17 @@ class CustomSessionsController < Devise::SessionsController
   def after_login
   	url = "https://bitcoin.toshi.io/api/v0/addresses/"
 		url += current_user.wallet.receiving_address
-		
-  	@data = URI.parse(url).read
-		hash_data = JSON.parse(@data)
-		balance = hash_data['balance'].to_i + hash_data['unconfirmed_received'].to_i
-  	current_user.wallet.balance = balance
-  	
+
+    @data = Curl.get(url).body_str
+    hash_data = JSON.parse(@data)
+
+    if (hash_data["error"] == nil)
+  		balance = hash_data['balance'].to_i + hash_data['unconfirmed_received'].to_i
+    	current_user.wallet.balance = balance
+  	else
+      current_user.wallet.balance = 0
+    end
+    
 		current_user.wallet.save()
 		current_user.save()
   	

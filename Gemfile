@@ -23,5 +23,5 @@ gem 'rails4-autocomplete'
 gem 'jquery-ui-rails'
 gem 'curb'
 gem 'ffi'
-
+gem 'open-uri'
 gem 'chain-ruby'
