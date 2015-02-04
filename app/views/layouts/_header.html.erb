@@ -16,24 +16,28 @@
 
         <% if current_user.nil? %>
           <li> 
-              <button type="button" class="btn btn-default navbar-btn">
+              <div type="button" class="btn btn-default navbar-btn">
                 <%= link_to("Sign up", new_user_registration_path) %> 
-              </button> 
+              </div> 
           </li>  
           <li> 
-            <button type="button" class="btn btn-default navbar-btn">
+            <div type="button" class="btn btn-default navbar-btn">
               <%= link_to("Log in", new_user_session_path) %> 
-            </button> 
+            </div> 
           </li>
         <% else %>
           <li> 
-            <button type="button" class="btn btn-default navbar-btn">
-              <%= link_to("Send coins", new_transfer_path) %> 
-            </button> 
+            <div type="button" class="btn btn-default navbar-btn">
+              <%= link_to("Deposit cash", "/") %> 
+            </div> 
 
-            <button type="button" class="btn btn-default navbar-btn">
+            <div type="button" class="btn btn-default navbar-btn">
+              <%= link_to("Send coins", new_transfer_path) %> 
+            </div> 
+
+            <div type="button" class="btn btn-default navbar-btn">
               <%= link_to("Log out", destroy_user_session_path, method: :delete) %> 
-            </button> 
+            </div> 
           </li>
         <% end %>
       </ul>  
