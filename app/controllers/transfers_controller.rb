@@ -85,11 +85,11 @@ class TransfersController < ApplicationController
       outputs: [
         {
           address: User.find(params[:transfer][:recipient_id]).wallet.receiving_address,
-          amount: params[:transfer][:quantity]
+          amount: params[:transfer][:quantity]  
         }
       ]
     )
-    update_balance(params[:transfer][:quantity] - 10000)
+    update_balance(params[:transfer][:quantity].to_i - 10000)
     puts str
   end
 
