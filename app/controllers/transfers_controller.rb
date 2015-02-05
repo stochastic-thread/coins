@@ -94,7 +94,6 @@ class TransfersController < ApplicationController
   end
 
   def update_balance(quantity)
-    sleep(10000)
     url = "https://bitcoin.toshi.io/api/v0/addresses/"
     url += current_user.wallet.receiving_address
     @data = Curl.get(url).body_str
@@ -110,7 +109,7 @@ class TransfersController < ApplicationController
     current_user.wallet.balance = balance
     current_user.wallet.dollar_balance = dollar_balance
     current_user.wallet.save()
-    current_user.save()
+    current_user.save()    
   end
 
   private :set_transfer, :transfer_params, :build_tx, :update_balance
