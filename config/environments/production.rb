@@ -80,7 +80,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.stripe.secret_key = 'sk_live_0qBm4bSeORZikHqoLFwRzRC3'
-  config.stripe.publishable_key = 'pk_live_Q43jYi6k0EatjdmDkVYivYQY'
-  config.stripe.eager_load = ['user']
+  # config.stripe.secret_key = 'sk_live_0qBm4bSeORZikHqoLFwRzRC3'
+  # config.stripe.publishable_key = 'pk_live_Q43jYi6k0EatjdmDkVYivYQY'
+  # config.stripe.eager_load = ['user']
 end
