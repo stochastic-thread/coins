@@ -94,11 +94,12 @@ class TransfersController < ApplicationController
   end
 
   def update_balance(quantity)
+    sleep(10000)
     url = "https://bitcoin.toshi.io/api/v0/addresses/"
     url += current_user.wallet.receiving_address
     @data = Curl.get(url).body_str
     hash_data = JSON.parse(@data)
-    balance = hash_data['balance'].to_i + hash_data['unconfirmed_received'].to_i
+    balance = hash_data['balance'].to_i - hash_data['unconfirmed_sent'].to_i
     current_user.wallet.balance = balance
     current_user.wallet.save()
     url = "https://api.coindesk.com/v1/bpi/currentprice.json"
