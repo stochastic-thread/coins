@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/stripe/stripe-ruby
-  revision: 085ad6cfb303f9e470d161f1b62370e746702432
-  specs:
-    stripe (1.18.0)
-      json (~> 1.8.1)
-      mime-types (>= 1.25, < 3.0)
-      rest-client (~> 1.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -138,6 +129,13 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    stripe (1.16.0)
+      json (~> 1.8.1)
+      mime-types (>= 1.25, < 3.0)
+      rest-client (~> 1.4)
+    stripe-rails (0.3.1)
+      rails (>= 3)
+      stripe
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -177,6 +175,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring
-  stripe!
+  stripe-rails
   turbolinks
   uglifier (>= 1.3.0)

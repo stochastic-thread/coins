@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :payments
+
   resources :wallets
 
   devise_for :users, :controllers => { :sessions => "custom_sessions" }

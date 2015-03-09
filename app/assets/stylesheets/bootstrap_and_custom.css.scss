@@ -1,8 +1,13 @@
 $navbar-default-bg: #3498db;
 $navbar-default-link-color: #ffffff;
 $navbar-default-link-active-color: #ecf0f1;
-$font-family: Helvetica;
 $jumbotron-padding: 15px;
+
+@font-face {
+    font-family:'Lato-Medium';
+    src:font-url('Lato-Medium.ttf')  format('truetype');
+}
+
 $navbar-default-link-hover-color: #ddd;
 
 $navbar-default-toggle-hover-bg:           #bbb;

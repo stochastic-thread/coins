@@ -109,7 +109,7 @@ class TransfersController < ApplicationController
     current_user.wallet.balance = balance
     current_user.wallet.dollar_balance = dollar_balance
     current_user.wallet.save()
-    current_user.save()    
+    current_user.save()   
   end
 
   private :set_transfer, :transfer_params, :build_tx, :update_balance

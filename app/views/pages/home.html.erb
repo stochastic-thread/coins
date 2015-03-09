@@ -1,8 +1,8 @@
 
   <div class="jumbotron center">
     <% if current_user %>
-        <h1> <%= current_user.name.titleize %> </h1>
-
+        <h1> <%= current_user.name.titleize %> <!-- <a class="btn" href="/deposit">Deposit cash</a> --></h1>
+        <%= stripe_javascript_tag %>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title"> Your wallet </h3>
@@ -51,9 +51,11 @@
               <% dollar = JSON.parse(@data)["bpi"]["USD"]["rate"].to_f %>
               <% dollar_balance = ((balance * dollar)).fdiv(100000000) %>
 
-<!--               <% puts "balance " + balance.to_f.to_s %>
+<!--          
+              <% puts "balance " + balance.to_f.to_s %>
               <% puts "rate " + dollar.to_f.to_s %>
-              <% puts "baldol " + dollar_balance.to_f.to_s %> -->
+              <% puts "baldol " + dollar_balance.to_f.to_s %> 
+-->
 
               <td>           
                 <%= dollar_balance %>  

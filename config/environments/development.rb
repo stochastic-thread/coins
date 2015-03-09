@@ -36,8 +36,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-  # config.stripe.secret_key = 'sk_test_aqQo51A1cGQEk09BCaCGmkYZ'
-  # config.stripe.publishable_key = 'pk_test_k90DPHCGKmfYhYa5anVRrVKy'
-  # config.stripe.eager_load = ['user']
+  config.stripe.secret_key = 'sk_test_aqQo51A1cGQEk09BCaCGmkYZ'
+  config.stripe.publishable_key = 'pk_test_k90DPHCGKmfYhYa5anVRrVKy'
+  config.stripe.eager_load = ['user']
 
 end

@@ -8,11 +8,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
 	<%= render('layouts/header') %>
-
 	<div class="container">
-
 		<% flash.each { |name, msg| %>
 			<%= content_tag(:div, msg, class: "alert alert-info") %>
 		<% } %> 
