@@ -26,7 +26,7 @@
           </li>
           <li> 
 
-            <%= button_to "Send coins", new_transfer_path, class: "btn btn-default navbar-btn", method: :get%> 
+            <%= button_to "Send coins", new_transfer_path, class: "btn btn-default navbar-btn", method: :get %> 
           </li>
           <li> 
             <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-default navbar-btn", method: :delete %>  
@@ -35,9 +35,9 @@
       </ul>  
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/">Home</a></li>
-        <li><a href="about">About</a></li>
-        <li><a href="contact">Contact</a></li>
+        <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
+  <li class="<%= 'active' if current_page?(about_path) %>"><%= link_to "About", about_path %></li>
+  <li class="<%= 'active' if current_page?(contact_path) %>"><%= link_to "Contact", contact_path %></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
