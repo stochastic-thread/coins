@@ -3,6 +3,12 @@
 <%= form_tag payments_path, id: 'card-details' do %> 
 	<div class="payment-errors"></div> 
 
+
+	<div class="form-group"> 
+		<label for="payment-type">Deposit Amount:</label>
+		<input id="deposit-amount" class="form-control" type="text" data-stripe="amount" /> 
+	</div> 
+	
 	<div class="form-group"> 
 		<label for="card-number">Card Number:</label> 
 		<input id="card-number" class="form-control" type="text" data-stripe="number" /> 
@@ -30,11 +36,6 @@
 			<option value="subscription">Monthly subscription, $9.97</option> 
 		</select> 
 	</div>  -->
-
-	<div class="form-group"> 
-		<label for="payment-type">Deposit Amount:</label>
-		<input id="deposit-amount" class="form-control" type="text" data-stripe="amount" /> 
-	</div> 
 
 	<div> 
 		<div type="submit" class="btn btn-default"> Pay Now </div>
