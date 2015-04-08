@@ -19,7 +19,7 @@
             <tr>
               <td> <%= current_user.wallet.receiving_address %> </td>
 
-              <% if current_user.wallet.balance == 0 %>
+              <% if current_user.wallet.balance == 0 or current_user.wallet.balance.nil?%>
                 <p> Begin by sending some BTC to your receiving address, displayed below. </p>
               <% end %>
 
@@ -90,7 +90,7 @@
 
               <td>
                 <div id = "usd_balance"></div>          
-                 
+
                 <%= dollar_balance %>  
                 <% current_user.wallet.dollar_balance = dollar_balance %>
                 <% current_user.wallet.save() %>
