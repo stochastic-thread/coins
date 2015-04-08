@@ -1,0 +1,71 @@
+
+  <div class="jumbotron center">
+    <% if current_user %>
+        <h1> <%= current_user.name.titleize %> <!-- <a class="btn" href="/deposit">Deposit cash</a> --></h1>
+        <%= stripe_javascript_tag %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"> Your wallet </h3>
+          </div>
+          
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <th>Address</th>
+                <th>Balance (Ƀ)</th>
+                <th>Balance ($)</th>
+              </thead>
+            
+            <tr>
+              <td> <%= current_user.wallet.receiving_address %> </td>
+
+              <% if current_user.wallet.balance == 0 %>
+                <p> Begin by sending some BTC to your receiving address, displayed below. </p>
+              <% end %>
+
+              <% if current_user %>
+                  <%= javascript_tag do %>
+                      var url = "https://bitcoin.toshi.io/api/v0/addresses/";
+                      url += '<%=current_user.wallet.receiving_address%>';
+                      jQuery(document).ready(function() {
+                          refreshingPartial();
+                          setInterval(refreshingPartial, 1000)
+                      });
+              
+                      function refreshingPartial() {
+                        $.getJSON( url, function( hash_data ) {
+                          $.getJSON ("https://api.coindesk.com/v1/bpi/currentprice.json", function(prices) {
+                            balance = parseFloat(hash_data['balance']) + parseFloat(hash_data['unconfirmed_sent']) + parseFloat(hash_data['unconfirmed_received'])
+                            usd_price_float = prices["bpi"]["USD"]["rate_float"];
+                            dollar_balance = (balance / 100000000) * usd_price_float;
+                            $( '#btc_balance' ).empty().append(balance / 100000000);
+                            $( '#usd_balance' ).empty().append(parseFloat(Math.round(dollar_balance * 100) / 100).toFixed(2));
+                          });
+                        });
+                      }
+                  <% end %>
+              <% end %>
+
+              <td>
+                <div id = "btc_balance"></div>
+
+              </td>
+
+              <td>
+                <div id = "usd_balance"></div>          
+                        
+              </td> 
+              
+            </tr>
+            </table>
+          </div>
+        </div>
+
+    <% else %>
+        <h1>Coins</h1>
+    <% end %>
+    <p> Top up your account, get your friends online, and send them coins. </p>
+    <p> For free. Forever. </p>
+  </div>
+</div>
+

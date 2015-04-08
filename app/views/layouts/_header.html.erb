@@ -12,18 +12,27 @@
     
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-left">
-
         <% if current_user.nil? %>
           <li> 
-            <%= button_to "Sign up", new_user_registration_path, class: "btn btn-default navbar-btn", method: :get %> 
+            <%= button_to "Sign up", 
+                new_user_registration_path, 
+                class: "btn btn-default navbar-btn", method: :get %> 
           </li>  
+          
           <li> 
-            <%= button_to "Log in", new_user_session_path, class: "btn btn-default navbar-btn", method: :get %> 
+            <%= button_to "Log in", 
+            new_user_session_path, 
+            class: "btn btn-default navbar-btn", method: :get %> 
           </li>
+        
         <% else %>
+          
           <li> 
-            <%= button_to "Deposit cash", new_payment_path, class: "btn btn-default navbar-btn", method: :get %> 
+            <%= button_to "Deposit cash", 
+            new_payment_path, 
+            class: "btn btn-default navbar-btn", method: :get %> 
           </li>
+
           <li> 
 
             <%= button_to "Send coins", new_transfer_path, class: "btn btn-default navbar-btn", method: :get %> 

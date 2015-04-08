@@ -21,35 +21,66 @@
 
               <% if current_user.wallet.balance == 0 %>
                 <p> Begin by sending some BTC to your receiving address, displayed below. </p>
-              <% else %>    
+              <% end %>
+
+              <!-- <% if current_user.wallet.balance != 0 %> -->
+
               <% require 'curb' %>
               <% url = "https://bitcoin.toshi.io/api/v0/addresses/" %>
               <% url += current_user.wallet.receiving_address %>
               <% @data = Curl.get(url).body_str %>
-  
+
                <% hash_data = JSON.parse(@data) %>
-               <% balance = hash_data['balance'].to_i + hash_data['unconfirmed_sent'].to_i %>
+               <% balance = hash_data['balance'].to_i + hash_data['unconfirmed_sent'].to_i + hash_data['unconfirmed_received'].to_i %>
                <% current_user.wallet.balance = balance %>
-                
+              
                <% current_user.wallet.save() %>
                <% current_user.save() %>
+
+
+              <!-- <% end %> -->
+
+              <% if current_user %>
+                  <%= javascript_tag do %>
+                      jQuery(document).ready(function () {
+                          refreshPartial();
+                          setInterval(refreshingPartial, 1000)
+                      });
+              
+
+                      function refreshingPartial() {
+                        $.getJSON( url, function( hash_data ) {
+                          $.getJSON ("https://api.coindesk.com/v1/bpi/currentprice.json", function(prices) {
+                            balance = parseFloat(hash_data['balance']) + parseFloat(hash_data['unconfirmed_sent']) + parseFloat(hash_data['unconfirmed_received'])
+                            usd_price_float = prices["bpi"]["USD"]["rate_float"]
+                            dollar_balance = balance * usd_price_float
+                            $( "#btc_balance" ).append(balance);
+                            $( "#usd_balance" ).append(dollar_balance);
+                          })
+                        })
+                      }
+                  <% end %>
               <% end %>
 
               <td>
-                <% if current_user.wallet.balance < 1.0 %>
-                    <%= current_user.wallet.balance.to_f.fdiv(100000000) %> bitcoin
+                <div id = "btc_balance"></div>
+
+<!--            <% if current_user.wallet.balance < 1.0 %>
+                  <%= current_user.wallet.balance.to_f.fdiv(100000000) %> bitcoin
                 <% else %>
-                    <%= current_user.wallet.balance.to_f.fdiv(100000000) %> bitcoins
+                  <%= current_user.wallet.balance.to_f.fdiv(100000000) %> bitcoins
                 <% end %> 
+-->              
+
               </td>
 
-              <% url = "https://api.coindesk.com/v1/bpi/currentprice.json" %>
+<!--               <% url = "https://api.coindesk.com/v1/bpi/currentprice.json" %>
               <% balance = current_user.wallet.balance %>
 
               <% @data = Curl.get(url).body_str %>
 
               <% dollar = JSON.parse(@data)["bpi"]["USD"]["rate"].to_f %>
-              <% dollar_balance = ((balance * dollar)).fdiv(100000000) %>
+              <% dollar_balance = ((balance * dollar)).fdiv(100000000) %> -->
 
 <!--          
               <% puts "balance " + balance.to_f.to_s %>
@@ -57,7 +88,9 @@
               <% puts "baldol " + dollar_balance.to_f.to_s %> 
 -->
 
-              <td>           
+              <td>
+                <div id = "usd_balance"></div>          
+                 
                 <%= dollar_balance %>  
                 <% current_user.wallet.dollar_balance = dollar_balance %>
                 <% current_user.wallet.save() %>

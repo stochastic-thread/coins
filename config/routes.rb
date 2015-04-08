@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get :autocomplete_user_name, :on => :collection
   end
 
-  root 'pages#home'
+  root 'pages#hex'
 
   get 'about' => 'pages#about'
   get 'contact' => 'pages#contact'
