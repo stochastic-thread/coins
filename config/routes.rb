@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   root 'pages#hex'
-
+  get 'hello' => 'pages#hello'
   get 'about' => 'pages#about'
   get 'contact' => 'pages#contact'
 

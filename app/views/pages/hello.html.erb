@@ -1,0 +1,47 @@
+<div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"> Testing </h3>
+            </div>
+
+            <div class="btn btn-primary" onclick="toggleText()">
+                <span class="mybtn">€1 is </span>
+                <span class="curr"> </span>
+            </div>
+            
+            <div class="panel-body">
+                <%= javascript_tag do %>
+                    function toggleText() {
+                      var content = $(".mybtn").text();
+                      if (content == "€1 is ") {
+                        $(".mybtn").empty().append("$1 is ");
+                      }
+                      
+                      if (content == "$1 is ") {
+                        $(".mybtn").empty().append("€1 is ");
+                      }
+                    }
+
+                    jQuery(document).ready(function() {
+                      refreshingPartial();
+                      setInterval(refreshingPartial, 1000);
+                    });
+
+                    function refreshingPartial() {
+                        var content = $(".mybtn").text();
+                        if (content == "$1 is ") {
+                            $.getJSON("http://api.fixer.io/latest?base=USD", function(info) {
+                                $( '.curr').empty().append("€"+info['rates']['EUR']);
+                            });
+                        }
+                        
+                        if (content == "€1 is ") {
+                            $.getJSON("http://api.fixer.io/latest?base=EUR", function(info) {
+                                $( '.curr').empty().append("$"+info['rates']['USD']);
+                            });
+                        }
+                    }
+                <% end %>
+            </div>
+        </div>
+</div>

@@ -1,114 +1,119 @@
+<div class="jumbotron center">
+  <% if current_user %>
+    <h1> <%= current_user.name.titleize %> </h1>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"> Wallet </h3>
+        </div>
+        
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <th>
+                <h4>Address<h4>
+              </th>
+              <th>
+                <span class="btn btn-default">
+                  <span class="currency_name">Ƀ</span> 
+                  ($<span id="btcusd"></span>)
+                </span>
+              </th>
 
-  <div class="jumbotron center">
-    <% if current_user %>
-        <h1> <%= current_user.name.titleize %> <!-- <a class="btn" href="/deposit">Deposit cash</a> --></h1>
-        <%= stripe_javascript_tag %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title"> Wallet </h3>
-          </div>
+              <th>
+                <span class="btn btn-default">
+                  <span class="currency_name">$</span>
+                  (€<span id="eurusd"></span>)
+                </span>
+              </th>
+
+              <th>
+                <span class="btn btn-default">
+                  <span class="currency_name">€</span>
+                  ($<span id="usdeur"></span>)
+                </span>
+              </th>
+
+              <th>
+                <span class="btn btn-default">
+                  <span class="currency_name">£</span>
+                  ($<span id="gbpusd"></span>)
+                </span>
+              </th>
+            </thead>
           
-          <div class="panel-body">
-            <table class="table">
-              <thead>
-                <th><h4>Address<h4></th>
-                <th><span class="btn btn-default"><span class="currency_name">Ƀ</span> ($<span id="btcusd"></span>)</span></th>
-                <th><span class="btn btn-default"><span class="currency_name">$</span> (€<span id="eurusd"></span>)</span></th>
-                <th><span class="btn btn-default"><span class="currency_name">€</span> ($<span id="usdeur"></span>)</span></th>
-                <th><span class="btn btn-default"><span class="currency_name">£</span> ($<span id="gbpusd"></span>)</span></th>
-                
-              </thead>
-            
             <tr>
               <td> <%= current_user.wallet.receiving_address %> </td>
-
-              <% if current_user.wallet.balance == 0 %>
-                <p> Begin by sending some BTC to your receiving address, displayed below. </p>
-              <% end %>
-
-              <% if current_user %>
-                  <%= javascript_tag do %>
-                      var url = "https://bitcoin.toshi.io/api/v0/addresses/";
-                      url += '<%=current_user.wallet.receiving_address%>';
-                      jQuery(document).ready(function() {
-                          refreshingPartial();
-                          setRates();
-                          setInterval(refreshingPartial, 1000);
-                          setInterval(setRates, 15000);
-                      });
-              
-                      function refreshingPartial() {
-                          $.getJSON ("https://api.coindesk.com/v1/bpi/currentprice.json", function(prices) {
-                            var final = 0.0;
-                            $.getJSON( url, function( json ) {
-                                final = parseFloat(json['balance']);
-                                final += parseFloat(json['unconfirmed_sent']);
-                                final += parseFloat(json['unconfirmed_received']);
-                                balance = final;
-                                usd_price_float = prices["bpi"]["USD"]["rate_float"];
-                                eur_price_float = prices["bpi"]["EUR"]["rate_float"];
-                                gbp_price_float = prices["bpi"]["GBP"]["rate_float"];
-
-                                dollar_balance = (balance / 100000000) * usd_price_float;
-                                eur_balance = (balance / 100000000) * eur_price_float;
-                                gbp_balance = (balance / 100000000) * gbp_price_float;
-
-                                $( '#btcusd').empty().append(prices["bpi"]["USD"]["rate_float"]);
-                                $( '#btc_balance' ).empty().append(balance / 100000000);
-                                $( '#usd_balance' ).empty().append(parseFloat(Math.round(dollar_balance * 100) / 100).toFixed(2));
-                                $( '#eur_balance' ).empty().append(parseFloat(Math.round(eur_balance * 100) / 100).toFixed(2));
-                                $( '#gbp_balance' ).empty().append(parseFloat(Math.round(gbp_balance * 100) / 100).toFixed(2));
-                            });
-                          });
-                      }
-
-                      function setRates() {
-                        $.getJSON("http://api.fixer.io/latest?base=USD", function(info) {
-                            var eurusd = info['rates']['EUR'];
-                            $( '#eurusd').empty().append(eurusd);
-                        });
-
-                        $.getJSON("http://api.fixer.io/latest?base=EUR", function(info) {
-                            var usdeur = info['rates']['USD']; 
-                            $( '#usdeur').empty().append(usdeur);
-                        });
-
-                        $.getJSON("http://api.fixer.io/latest?base=GBP", function(info) {
-                            var gbpusd = info['rates']['USD'];
-                            $( '#gbpusd').empty().append(gbpusd);
-                        });
-                      }
-                  <% end %>
-              <% end %>
-
-              <td>
-                <div id = "btc_balance"></div>
-
-              </td>
-
-              <td>
-                <div id = "usd_balance"></div>          
-                        
-              </td>               
-
-              <td>
-                <div id = "eur_balance"></div>
-
-              </td>
-
-              <td>
-                <div id = "gbp_balance"></div>          
-                        
-              </td> 
-              
+              <td> <div id = "btc_balance"></div> </td>
+              <td> <div id = "usd_balance"></div> </td>               
+              <td> <div id = "eur_balance"></div> </td>
+              <td> <div id = "gbp_balance"></div> </td> 
             </tr>
-            </table>
-          </div>
-        </div>
 
-    <% else %>
-        <h1>Coins</h1>
-    <% end %>
+            <% if current_user.wallet.balance == 0 %>
+              <p> Begin by sending some BTC to your receiving address, displayed below. </p>
+            <% end %>
+
+            <% if current_user %>
+                <%= javascript_tag do %>
+                    var url = "https://bitcoin.toshi.io/api/v0/addresses/";
+                    url += '<%=current_user.wallet.receiving_address%>';
+                    jQuery(document).ready(function() {
+                        refreshingPartial();
+                        setRates();
+                        setInterval(refreshingPartial, 1000);
+                        setInterval(setRates, 15000);
+                    });
+            
+                    function refreshingPartial() {
+                        $.getJSON ("https://api.coindesk.com/v1/bpi/currentprice.json", function(prices) {
+                          var final = 0.0;
+                          $.getJSON( url, function( json ) {
+                              final = parseFloat(json['balance']);
+                              final += parseFloat(json['unconfirmed_sent']);
+                              final += parseFloat(json['unconfirmed_received']);
+                              balance = final;
+                              usd_price_float = prices["bpi"]["USD"]["rate_float"];
+                              eur_price_float = prices["bpi"]["EUR"]["rate_float"];
+                              gbp_price_float = prices["bpi"]["GBP"]["rate_float"];
+
+                              dollar_balance = (balance / 100000000) * usd_price_float;
+                              eur_balance = (balance / 100000000) * eur_price_float;
+                              gbp_balance = (balance / 100000000) * gbp_price_float;
+
+                              $( '#btcusd').empty().append(prices["bpi"]["USD"]["rate_float"]);
+                              $( '#btc_balance' ).empty().append(balance / 100000000);
+                              $( '#usd_balance' ).empty().append(parseFloat(Math.round(dollar_balance * 100) / 100).toFixed(2));
+                              $( '#eur_balance' ).empty().append(parseFloat(Math.round(eur_balance * 100) / 100).toFixed(2));
+                              $( '#gbp_balance' ).empty().append(parseFloat(Math.round(gbp_balance * 100) / 100).toFixed(2));
+                          });
+                        });
+                    }
+
+                    function setRates() {
+                      $.getJSON("http://api.fixer.io/latest?base=USD", function(info) {
+                          var eurusd = info['rates']['EUR'];
+                          $( '#eurusd').empty().append(eurusd);
+                      });
+
+                      $.getJSON("http://api.fixer.io/latest?base=EUR", function(info) {
+                          var usdeur = info['rates']['USD']; 
+                          $( '#usdeur').empty().append(usdeur);
+                      });
+
+                      $.getJSON("http://api.fixer.io/latest?base=GBP", function(info) {
+                          var gbpusd = info['rates']['USD'];
+                          $( '#gbpusd').empty().append(gbpusd);
+                      });
+                    }
+                <% end %>
+            <% end %>
+          </table>
+        </div>
+      </div>
+
+  <% else %>
+      <h1> Coins </h1>
+  <% end %>
     <p> Top up your account, get your friends online, and send them coins. </p>
     <p> For free. Forever. </p>
   </div>
