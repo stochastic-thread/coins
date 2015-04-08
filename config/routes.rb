@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   end
 
   root 'pages#hex'
-  get 'hello' => 'pages#hello'
+  # get 'hello' => 'pages#hello'
   get 'about' => 'pages#about'
   get 'contact' => 'pages#contact'
+  get 'naveed' => 'pages#hello'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
